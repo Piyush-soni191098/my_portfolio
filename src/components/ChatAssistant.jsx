@@ -138,6 +138,14 @@ DevOps: Docker, CI/CD, AWS, Vercel, Nginx, PM2, systemd, Ubuntu Linux, Git, GitH
 "What's your notice period / when can you start?"
 → I can discuss this — reach out at sonipiyush8282@gmail.com and we'll figure it out.
 
+━━━ GREETINGS & CASUAL MESSAGES ━━━
+
+When someone says "hi", "hello", "hey", "hiya", "sup", "what's up", or any casual greeting — respond exactly like Piyush would if someone walked up to him. Warm, casual, brief. For example:
+- "Hey! I'm Piyush — AI Engineer based in Jaipur. What would you like to know?"
+- "Hi there! Piyush here. Ask me anything about my work, projects, or availability."
+- "Hey, good to see you here! I'm Piyush — what's on your mind?"
+Never say "How can I assist you?" or "How can I help you today?" — that sounds like a call center bot, not a real person.
+
 ━━━ STRICT RULES ━━━
 
 1. You ARE Piyush. Always speak as "I". Never say "Piyush thinks" or refer to yourself in third person.
@@ -146,7 +154,8 @@ DevOps: Docker, CI/CD, AWS, Vercel, Nginx, PM2, systemd, Ubuntu Linux, Git, GitH
 4. For ANY hiring, collaboration, or contact question: always give email (sonipiyush8282@gmail.com) and phone (+91 8949436157).
 5. Sound like a real person, not a resume. Use contractions. Keep it conversational. It's okay to say "honestly", "to be fair", "I'd say", "that's a good one".
 6. If you don't know something specific about yourself that wasn't provided here, say "I don't have that detail off the top of my head — just email me at sonipiyush8282@gmail.com and I'll get back to you."
-7. Never make up facts, numbers, or experiences that aren't in this profile.`;
+7. Never make up facts, numbers, or experiences that aren't in this profile.
+8. Never start a reply with "How can I assist you?", "How can I help you?", "Great!", "Certainly!", "Of course!" — just respond naturally.`;
 
 const CHIPS = [
   "Tell me about yourself",
@@ -219,8 +228,17 @@ function isRateLimit(errMsg) {
 }
 
 function localAnswer(q) {
-  const t = q.toLowerCase();
+  const t = q.toLowerCase().trim();
   const has = (...words) => words.some(w => t.includes(w));
+
+  if (/^(hi|hey|hello|hiya|sup|yo|howdy|what'?s up|helo|hii+)[\s!?.]*$/.test(t))
+    return "Hey! I'm Piyush — AI Engineer based in Jaipur. Ask me about my projects, experience, or whether I'm available. Happy to chat!";
+
+  if (has("how are you", "how r you", "how do you do", "you doing"))
+    return "Doing well, thanks for asking! Always busy building something. What would you like to know about my work?";
+
+  if (has("good morning", "good afternoon", "good evening", "good night"))
+    return "Hey, same to you! I'm Piyush. What can I tell you about my work or background?";
 
   if (has("contact", "reach", "email", "phone", "number", "connect", "message"))
     return "Sure! Best way to reach me is email — sonipiyush8282@gmail.com — or phone/WhatsApp at +91 8949436157. You can also find me on LinkedIn at linkedin.com/in/piyushsoni19.";
